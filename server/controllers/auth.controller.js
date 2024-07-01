@@ -38,4 +38,31 @@ export const signup = async (req, res, next) => {
   }
 };
 
-export const signin = async (req, res, next) => {};
+export const signin = async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password || email.trim() === "" || password.trim() === "") {
+    return next(errorHandler(400, "Please provide all the fields"));
+  }
+  try {
+    const validUser = await User.findOne({ email });
+    if (!validUser) {
+      return next(errorHandler(400, "Invalid Credentials"));
+    }
+    const validPassword = bcryptjs.compareSync(password, validUser.password);
+    if (!validPassword) {
+      return next(errorHandler(400, "Invalid Credentials"));
+    }
+    const token = createToken(validUser._id);
+    const userdata = {
+      _id: validUser._id,
+      username: validUser.username,
+      email: validUser.email,
+      createdDate: validUser.createdDate,
+      updatedDate: validUser.updatedDate,
+      token,
+    };
+    res.status(200).json(userdata);
+  } catch (err) {
+    next(err);
+  }
+};
