@@ -61,7 +61,12 @@ export const signin = async (req, res, next) => {
       updatedDate: validUser.updatedDate,
       token,
     };
-    res.status(200).json(userdata);
+    res
+      .status(200)
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .json(userdata);
   } catch (err) {
     next(err);
   }

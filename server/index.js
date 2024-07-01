@@ -1,11 +1,13 @@
 import express from "express";
-import authRoutes from "./routes/auth.route.js";
+import { authRoutes, userRoutes } from "./routes/index.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const port = 3000;
 app.use(express.json());
+app.use(cookieParser());
 dotenv.config();
 
 mongoose
@@ -27,6 +29,7 @@ app.get("/test", (req, res) => {
 
 //routes
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 //middleware to handle errors and stuff
 app.use((err, req, res, next) => {
