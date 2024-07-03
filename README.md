@@ -5,13 +5,13 @@
 <ul>
 
 <li>SignUp</li>
-/api/auth/signup<br/><br/>
+/api/auth/signup (POST)<br/><br/>
 <li>SignIn</li>
-/api/auth/signin<br/><br/>
+/api/auth/signin (POST)<br/><br/>
 <li>SignOut</li>
-/api/user/signout<br/><br/>
+/api/user/signout (POST)<br/><br/>
 <li>UpdateUser</li>
-/api/user/update<br/><br/>
+/api/user/update:userid (PUT)<br/><br/>
 <li>Deletuser</li>
-/api/user/delete<br/><br/>
+/api/user/delete:userid (DELETE)<br/><br/>
 </ul>
