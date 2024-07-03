@@ -6,13 +6,16 @@ import jwt from "jsonwebtoken";
 
 dotenv.config();
 
+//Function to create jason web token (JWT)
 export const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
 };
 
 export const signup = async (req, res, next) => {
+  //Extracting the fields from the request body
   const { username, email, password } = req.body;
 
+  //Checking if the fields are empty
   if (
     !username ||
     !email ||
@@ -24,14 +27,16 @@ export const signup = async (req, res, next) => {
     return next(errorHandler(400, "Please provide all the fields"));
   }
 
+  //Hashing the password
   const hashedPassword = bcryptjs.hashSync(password, 10);
+  //Creating The User
   const newUser = new User({ username, email, password: hashedPassword });
 
   try {
+    //Saving the user
     await newUser.save();
-    //JWT AUTH
+    //Creating the token
     const token = createToken(newUser._id);
-
     res.status(200).json({ email, token });
   } catch (error) {
     next(error);
@@ -39,11 +44,14 @@ export const signup = async (req, res, next) => {
 };
 
 export const signin = async (req, res, next) => {
+  //Extracting the fields from the request body
   const { email, password } = req.body;
+  //Checking if the fields are empty
   if (!email || !password || email.trim() === "" || password.trim() === "") {
     return next(errorHandler(400, "Please provide all the fields"));
   }
   try {
+    //Checking the credentials
     const validUser = await User.findOne({ email });
     if (!validUser) {
       return next(errorHandler(400, "Invalid Credentials"));
@@ -52,6 +60,7 @@ export const signin = async (req, res, next) => {
     if (!validPassword) {
       return next(errorHandler(400, "Invalid Credentials"));
     }
+    //Creating the token
     const token = createToken(validUser._id);
     const userdata = {
       _id: validUser._id,
@@ -61,6 +70,7 @@ export const signin = async (req, res, next) => {
       updatedDate: validUser.updatedDate,
       token,
     };
+    //Saving the token as a cookie
     res
       .status(200)
       .cookie("access_token", token, {
