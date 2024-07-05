@@ -14,4 +14,6 @@
 /api/user/update:userid (PUT)<br/><br/>
 <li>Deletuser</li>
 /api/user/delete:userid (DELETE)<br/><br/>
+<li>AddListing</li>
+/api/listing/addlisting (POST)<br/><br/>
 </ul>
