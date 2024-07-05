@@ -15,5 +15,7 @@
 <li>Deletuser</li>
 /api/user/delete:userid (DELETE)<br/><br/>
 <li>AddListing</li>
-/api/listing/addlisting (POST)<br/><br/>
+/api/listing/add (POST)<br/><br/>
+<li>DeleteListing</li>
+/api/listing/delete:listingid (DELETE)<br/><br/>
 </ul>

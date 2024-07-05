@@ -31,3 +31,25 @@ export const addListing = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const deleteListing = async (req, res, next) => {
+  const userId = req.user._id;
+  const listingId = req.params.listingid;
+
+  if (!listingId)
+    return res.status(400).json("Something went wrong, please try again later");
+
+  try {
+    const listingToDelete = await Listing.findById(listingId);
+    if (!listingToDelete) return res.status(404).json("Listing not found");
+    if (listingToDelete.owner.toString() !== userId.toString()) {
+      return res
+        .status(403)
+        .json("You are not authorized to delete this listing");
+    }
+    await Listing.findByIdAndDelete(listingId);
+    return res.status(200).json("Listing deleted successfully");
+  } catch (err) {
+    next(err);
+  }
+};
