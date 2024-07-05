@@ -21,7 +21,7 @@ const listingSchema = new mongoose.Schema(
       required: true,
     },
     owner: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
   },
@@ -33,6 +33,6 @@ const listingSchema = new mongoose.Schema(
   }
 );
 
-const Book = mongoose.model("Listing", listingSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
-export default Book;
+export default Listing;
