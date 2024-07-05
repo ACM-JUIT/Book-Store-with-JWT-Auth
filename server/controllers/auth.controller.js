@@ -2,14 +2,11 @@ import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs";
 import User from "../models/user.js";
 import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
+import { createToken } from "../utils/createToken.js";
 
 dotenv.config();
 
 //Function to create jason web token (JWT)
-export const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
-};
 
 export const signup = async (req, res, next) => {
   //Extracting the fields from the request body

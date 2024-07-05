@@ -7,16 +7,22 @@ const bookSchema = new mongoose.Schema(
       required: true,
       maxLength: 100,
     },
+    bookdescription: String,
+    price: {
+      type: Number,
+      required: true,
+    },
     authorname: {
       type: String,
       required: true,
     },
-    genre: {
-      type: Array,
-    },
     bookdisplayphoto: {
       type: String,
       required: true,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {
