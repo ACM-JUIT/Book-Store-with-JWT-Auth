@@ -18,4 +18,6 @@
 /api/listing/add (POST)<br/><br/>
 <li>DeleteListing</li>
 /api/listing/delete:listingid (DELETE)<br/><br/>
+<li>UpdateListing</li>
+/api/listing/update:listingid (PUT)<br/><br/>
 </ul>
