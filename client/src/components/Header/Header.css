@@ -1,0 +1,21 @@
+.navlink {
+    position: relative;
+    font-family: "Oswald", sans-serif;
+    font-size: 1.75rem;
+}
+
+.navlink::after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    background: #F0A500;
+    transition: width .4s;
+}
+
+.navlink:hover::after {
+    width: 100%;
+}

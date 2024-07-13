@@ -1,57 +1,65 @@
-import { Navbar, TextInput, Button } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
+import React, { useState } from "react";
+import logo from "../../assets/Logo.png";
+import { Link, NavLink } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import "./Header.css";
+import Button from "../Button/Button";
+
 function Header() {
-  const path = useLocation().pathname;
+  const [openMenu, setOpenMenu] = useState(false);
+  const menuOpenStyle = {
+    width: "35px",
+    height: "2px",
+    backgroundColor: "black",
+    margin: "6px 0",
+    transition: "0.4s",
+  };
+  const toggleMenu = () => {
+    setOpenMenu(!openMenu);
+  };
   return (
-    <Navbar className="border-b-2">
-      <Link
-        to="/"
-        className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
-        style={{
-          fontFamily: "Playwrite US Trad",
-        }}
-      >
-        <span className="py-1">Book</span>
-        Store
-      </Link>
-      <form action="">
-        <TextInput
-          type="text"
-          placeholder="Search.."
-          rightIcon={AiOutlineSearch}
-          className="hidden lg:inline"
-        />
-      </form>
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
-        <AiOutlineSearch />
-      </Button>
-      <div className="flex gap-2 md:order-2">
-        <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
-          <FaMoon />
-        </Button>
-
-        <Link to="/signin">
-          <Button gradientDuoTone="purpleToBlue" outline>
-            Sign In
-          </Button>
+    <header className="px-4 py-2 flex  flex-wrap bg-[#1B1A17] text-white min-h-[100px] ">
+      <div className="w-1/3 flex justify-start min-w-20">
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="logo" className="lg:max-h-12 md:max-h-8 " />
         </Link>
-
-        <Navbar.Toggle />
       </div>
-      <Navbar.Collapse>
-        <Navbar.Link active={path === "/"} as={"div"}>
-          <Link to="/">Home</Link>
-        </Navbar.Link>
-        <Navbar.Link active={path === "/about"} as={"div"}>
-          <Link to="/about">About</Link>
-        </Navbar.Link>
-        <Navbar.Link active={path === "/projects"} as={"div"}>
-          <Link to="/projects">Store</Link>
-        </Navbar.Link>
-      </Navbar.Collapse>
-    </Navbar>
+      <div className="hidden md:flex justify-center  items-center gap-10 w-1/3">
+        <NavLink className="navlink" to="/">
+          Home
+        </NavLink>
+        <NavLink className="navlink" to="/about">
+          About
+        </NavLink>
+        <NavLink className="navlink" to="/store">
+          Store
+        </NavLink>
+      </div>
+      <div className="hidden md:flex justify-end w-1/3">
+        <Button value="Sign Up" to="/signup" />
+      </div>
+      <div className="flex md:hidden items-center w-2/3 justify-end">
+        <div className="inline-block cursor-pointer" onClick={toggleMenu}>
+          {openMenu ? <X size={35} /> : <Menu size={35} />}
+        </div>
+      </div>
+      {openMenu && (
+        <div className="md:hidden flex flex-col w-full items-center gap-3 mt-2">
+          <NavLink className="navlink" to="/">
+            Home
+          </NavLink>
+          <NavLink className="navlink" to="/about">
+            About
+          </NavLink>
+          <NavLink className="navlink" to="/store">
+            Store
+          </NavLink>
+          <NavLink className="signup">
+            <Button value="Sign Up" to="/signup" />
+          </NavLink>
+        </div>
+      )}
+    </header>
   );
 }
 
