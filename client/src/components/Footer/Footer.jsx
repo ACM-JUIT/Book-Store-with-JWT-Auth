@@ -5,7 +5,7 @@ import "./Footer.css";
 function Footer() {
   const [formdata, setFormdata] = useState({ email: "" });
   const handleSubmit = (e) => {
-    e.target.preventdefault;
+    e.target.preventDefault();
     setFormdata({ email: "" });
   };
   return (
