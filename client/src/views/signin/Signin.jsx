@@ -2,13 +2,26 @@ import React, { useState } from "react";
 import authGraphic from "../../assets/auth.png";
 import { Link, useNavigate } from "react-router-dom";
 import "../../components/Footer/Footer.css";
+import {
+  signInFailure,
+  signInStart,
+  signinSuccess,
+} from "../../redux/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import Spinner from "../../components/Spinner/Spinner";
 
 function Signin() {
   const [formdata, setFormdata] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formdata.email || !formdata.password) {
+      return dispatch(signInFailure("Please fill all the fields"));
+    }
     try {
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -18,14 +31,14 @@ function Signin() {
       });
       const data = await res.json();
       if (data.success === false) {
-        return console.log(data.message);
+        return dispatch(signInFailure(data.message));
       }
       if (res.ok) {
-        setFormdata({});
+        dispatch(signinSuccess(data));
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      dispatch(signInFailure(error.message));
     }
     setFormdata({});
   };
@@ -67,9 +80,9 @@ function Signin() {
           <div>
             <button
               type="submit"
-              className="min-w-[300px] px-4 py-2 border-2 rounded-md text-white text-2xl font-['Oswald'] border-[#F0A500] my-2 bg-[#1B1A17] hover:bg-[#F0A500] hover:border-[#1B1A17] hover:tracking-[0.25em] transition-all duration-500"
+              className="min-w-[300px] px-4 py-2 border-2 rounded-md text-white text-2xl font-['Oswald'] border-[#F0A500] my-2 bg-[#1B1A17] hover:bg-[#F0A500] hover:border-[#1B1A17] hover:tracking-[0.25em] transition-all duration-500 text-center"
             >
-              Sign In
+              {loading ? <Spinner /> : "Sign In"}
             </button>
           </div>
           <span className="text-xl">
