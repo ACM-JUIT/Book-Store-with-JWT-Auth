@@ -2,17 +2,29 @@ import React, { useState } from "react";
 import authGraphic from "../../assets/auth.png";
 import { Link, useNavigate } from "react-router-dom";
 import "../../components/Footer/Footer.css";
+import {
+  signInFailure,
+  signInStart,
+  signinSuccess,
+} from "../../redux/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import Spinner from "../../components/Spinner/Spinner";
 
 function Signup() {
   const [formdata, setFormdata] = useState({});
+  const { loading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formdata);
+    if (!formdata.username || !formdata.email || !formdata.password) {
+      return dispatch(signInFailure("Please fill all the fields"));
+    }
     try {
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -22,10 +34,11 @@ function Signup() {
       });
       const data = await res.json();
       if (data.success === false) {
-        return console.log(data.message);
+        return dispatch(signInFailure(data.message));
       }
       setFormdata({});
       if (res.ok) {
+        dispatch(signinSuccess(null));
         navigate("/signin");
       }
     } catch (err) {
