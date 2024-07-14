@@ -9,7 +9,7 @@ function Footer() {
     setFormdata({ email: "" });
   };
   return (
-    <footer className="bg-[#1B1A17] text-white flex flex-col gap-5">
+    <footer className="bg-[#1B1A17] text-white flex flex-col gap-5 border-[rgba(230,213,184,0.2)] border-t-2">
       <div className="flex flex-col justify-center items-center my-4 gap-5">
         <div>
           <Link

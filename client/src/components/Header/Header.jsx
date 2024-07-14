@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../../assets/Logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import "./Header.css";
@@ -18,7 +17,7 @@ function Header() {
     setOpenMenu(!openMenu);
   };
   return (
-    <header className="px-4 py-2 flex  flex-wrap bg-[#1B1A17] text-white min-h-[100px] ">
+    <header className="px-4 py-2 flex  flex-wrap bg-[#1B1A17] text-white min-h-[100px] border-b-2 border-[rgba(230,213,184,0.2)]">
       <div className="w-1/3 flex justify-start min-w-20">
         <Link
           to="/"
