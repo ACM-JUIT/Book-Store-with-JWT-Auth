@@ -34,7 +34,7 @@ function Signup() {
   };
   return (
     <div className="h-[90vh] flex bg-[#e6d5b8cc]">
-      <div className="hidden md:flex w-7/12 bg-[#F0A500]  items-center rounded-r-[25%] overflow-hidden">
+      <div className="hidden md:flex w-7/12 bg-[#F0A500]  items-center rounded-r-[25%] overflow-hidden shadow-lg">
         <img src={authGraphic} alt="Auth" />
       </div>
       <div className="w-full md:w-5/12 flex flex-col gap-10 justify-center items-center">
@@ -87,7 +87,7 @@ function Signup() {
             </button>
           </div>
           <span className="text-xl">
-            Dont have an account?&nbsp;
+            Already have an account?&nbsp;
             <Link to="/signin" className="text-[#481E14] navlink font-semibold">
               Sign In
             </Link>
