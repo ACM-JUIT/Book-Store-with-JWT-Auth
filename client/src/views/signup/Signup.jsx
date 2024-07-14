@@ -33,12 +33,12 @@ function Signup() {
     }
   };
   return (
-    <div className="h-[90vh] flex bg-[#e6d5b8cc]">
-      <div className="hidden md:flex w-7/12 bg-[#F0A500]  items-center rounded-r-[25%] overflow-hidden shadow-lg">
+    <div className="h-[90vh] flex bg-[#e6d5b8e6]">
+      <div className="hidden md:flex w-7/12 bg-[#e4582699]  items-center rounded-r-[25%] overflow-hidden shadow-lg ">
         <img src={authGraphic} alt="Auth" />
       </div>
       <div className="w-full md:w-5/12 flex flex-col gap-10 justify-center items-center">
-        <span className="text-4xl font-['Oswald'] tracking-widest">
+        <span className="text-4xl font-['Oswald'] tracking-widest underline">
           Create Account
         </span>
         <form

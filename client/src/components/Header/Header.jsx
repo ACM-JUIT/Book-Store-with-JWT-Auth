@@ -20,7 +20,7 @@ function Header() {
       <div className="w-1/3 flex justify-start min-w-20">
         <Link
           to="/"
-          className="flex items-center text-2xl md:text-4xl font-['Playwrite_HU']  text-[#E6D5B8] font-semibold hover:scale-105 transition-transform duration-300 ease-in-out"
+          className="flex items-center text-2xl md:text-3xl lg:text-4xl font-['Playwrite_HU']  text-[#E6D5B8] font-semibold hover:scale-105 transition-transform duration-300 ease-in-out"
         >
           Books <span className="text-[#E45826]">Heaven</span>
         </Link>
@@ -34,6 +34,9 @@ function Header() {
         </NavLink>
         <NavLink className="navlink" to="/store">
           Store
+        </NavLink>
+        <NavLink className="navlink" to="/contact">
+          Contact
         </NavLink>
       </div>
       <div className="hidden md:flex justify-end w-1/3 items-center">
@@ -58,6 +61,9 @@ function Header() {
           </NavLink>
           <NavLink className="navlink" to="/store">
             Store
+          </NavLink>
+          <NavLink className="navlink" to="/contact">
+            Contact
           </NavLink>
           <NavLink to="/signup">
             <button className="font-['Oswald'] text-2xl border-2 border-[#E6D5B8] hover:bg-[#F0A500] hover:tracking-[0.25em] bg-[#1B1A17] text-white uppercase px-[30px] duration-500">

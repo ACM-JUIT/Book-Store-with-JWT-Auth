@@ -9,8 +9,8 @@ function Footer() {
     setFormdata({ email: "" });
   };
   return (
-    <footer className="bg-[#1B1A17] text-white flex flex-col gap-5 border-[rgba(230,213,184,0.2)] border-t-2">
-      <div className="flex flex-col justify-center items-center my-4 gap-5">
+    <footer className="bg-[#1B1A17] text-white flex flex-col  border-[rgba(230,213,184,0.2)] border-t-2">
+      <div className="flex flex-col justify-center items-center my-4 gap-5 mx-auto w-[80%] border-b-2 border-[#ffffff33]">
         <div>
           <Link
             to="/"
@@ -25,7 +25,7 @@ function Footer() {
         </div>
         <div>
           <form
-            className="border-[#E6D5B8] border-2 flex mx-4"
+            className="border-[#E6D5B8] border-2 flex mx-4 mb-5"
             onSubmit={handleSubmit}
           >
             <input
@@ -70,7 +70,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="hidden md:block w-1/2 px-8 py-4 my-4 font-['Poppins'] border-l-2 ">
+        <div className="hidden md:block w-1/2 px-8 py-4 my-4 font-['Poppins'] border-l-2 border-[rgba(255,255,255,0.2)] ">
           Welcome to Books Heaven, your premier online book store dedicated to
           bringing you the best in literature. Dive into a carefully curated
           selection spanning classics to contemporary bestsellers. Whether
