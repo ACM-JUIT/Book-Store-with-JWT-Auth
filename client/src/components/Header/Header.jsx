@@ -20,8 +20,11 @@ function Header() {
   return (
     <header className="px-4 py-2 flex  flex-wrap bg-[#1B1A17] text-white min-h-[100px] ">
       <div className="w-1/3 flex justify-start min-w-20">
-        <Link to="/" className="flex items-center">
-          <img src={logo} alt="logo" className="lg:max-h-12 md:max-h-8 " />
+        <Link
+          to="/"
+          className="flex items-center text-4xl font-['Playwrite_HU'] gap-3 text-[#E6D5B8] font-semibold hover:scale-105 transition-transform duration-300 ease-in-out"
+        >
+          Books <span className="text-[#E45826]">Heaven</span>
         </Link>
       </div>
       <div className="hidden md:flex justify-center  items-center gap-10 w-1/3">
