@@ -1,0 +1,20 @@
+.navlink {
+    position: relative;
+    font-size: 1.3rem;
+}
+
+.navlink::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    background: #1B1A17;
+    transition: width 0.4s;
+}
+
+.navlink:hover::after {
+    width: 100%;
+}
