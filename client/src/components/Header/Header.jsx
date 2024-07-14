@@ -22,7 +22,7 @@ function Header() {
       <div className="w-1/3 flex justify-start min-w-20">
         <Link
           to="/"
-          className="flex items-center text-4xl font-['Playwrite_HU'] gap-3 text-[#E6D5B8] font-semibold hover:scale-105 transition-transform duration-300 ease-in-out"
+          className="flex items-center text-2xl md:text-4xl font-['Playwrite_HU']  text-[#E6D5B8] font-semibold hover:scale-105 transition-transform duration-300 ease-in-out"
         >
           Books <span className="text-[#E45826]">Heaven</span>
         </Link>
