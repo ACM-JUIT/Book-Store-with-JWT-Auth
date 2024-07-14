@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import authGraphic from "../../assets/auth.png";
+
+import bookStore from "../../assets/bookStore.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import "../../components/Footer/Footer.css";
 import {
@@ -47,10 +48,14 @@ function Signup() {
   };
   return (
     <div className="h-[90vh] flex bg-[#e6d5b8e6]">
-      <div className="hidden md:flex w-7/12 bg-[#e4582699]  items-center rounded-r-[25%] overflow-hidden shadow-lg ">
-        <img src={authGraphic} alt="Auth" />
-      </div>
+      <div className="hidden md:flex w-7/12 bg-[#e4582699]  items-center rounded-r-[25%] overflow-hidden shadow-gray-700 shadow-2xl "></div>
       <div className="w-full md:w-5/12 flex flex-col gap-10 justify-center items-center">
+        <Link
+          to="/"
+          className="flex  text-4xl font-['Playwrite_HU']  text-[#1B1A17] font-bold hover:scale-150 transition-transform duration-300 ease-in-out mb-28"
+        >
+          Books <span className="text-[#E45826]">Heaven</span>
+        </Link>
         <span className="text-4xl font-['Oswald'] tracking-widest underline">
           Create Account
         </span>
