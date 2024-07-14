@@ -25,13 +25,13 @@ function Footer() {
         </div>
         <div>
           <form
-            className="border-[#E6D5B8] border-2 p-0"
+            className="border-[#E6D5B8] border-2 flex mx-4"
             onSubmit={handleSubmit}
           >
             <input
               value={formdata.email}
               onChange={(e) => setFormdata({ email: e.target.value })}
-              className="bg-[#1B1A17] px-4 py-2 font-['Poppins'] border-0 outline-none"
+              className="bg-[#1B1A17] px-4 py-2 font-['Poppins']  outline-none w-10/12"
               type="email"
             />
             <button
@@ -49,8 +49,16 @@ function Footer() {
             <span className="uppercase underline underline-offset-8 font-bold tracking-[0.15em] font-['Oswald'] text-2xl mb-4">
               About
             </span>
-            <Link className="w-fit navlink mx-auto">About Us</Link>
-            <Link className="w-fit navlink mx-auto">Source Code</Link>
+            <Link to="/about" className="w-fit navlink mx-auto">
+              About Us
+            </Link>
+            <Link
+              to="https://github.com/ACM-JUIT/Book-Store-with-JWT-Auth"
+              target="_blank"
+              className="w-fit navlink mx-auto"
+            >
+              Source Code
+            </Link>
           </div>
           <div className="flex flex-col text-center gap-3 py-4 min-w-fit ">
             <span className="uppercase underline underline-offset-8 font-bold tracking-[0.15em] font-['Oswald'] text-2xl mb-4">
