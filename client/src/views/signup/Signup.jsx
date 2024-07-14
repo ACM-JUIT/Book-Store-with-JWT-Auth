@@ -94,7 +94,7 @@ function Signup() {
           <div>
             <button
               type="submit"
-              className="min-w-[300px] px-4 py-2 border-2 rounded-md text-white text-2xl font-['Oswald'] border-[#F0A500] my-2 bg-[#1B1A17] hover:bg-[#F0A500] hover:border-[#1B1A17] hover:tracking-[0.25em] transition-all duration-500"
+              className="min-w-[300px] px-4 py-2 border-2 rounded-md text-white text-2xl font-['Oswald'] border-[#F0A500] my-2 bg-[#1B1A17] hover:bg-[#F0A500] hover:border-[#1B1A17] hover:tracking-[0.13em] transition-all duration-500"
             >
               {loading ? <Spinner /> : "Sign Up"}
             </button>
