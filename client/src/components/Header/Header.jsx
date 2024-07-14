@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import "./Header.css";
 import { useSelector } from "react-redux";
+import "./Header.css";
 
 function Header() {
   const [openMenu, setOpenMenu] = useState(false);

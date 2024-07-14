@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import readingBookGrahic from "../../assets/readingBookGraphic.png";
 import { Link, useNavigate } from "react-router-dom";
-import "./signup.css";
+import "./Signup.css";
 import {
   signInFailure,
   signInStart,
@@ -113,7 +113,10 @@ function Signup() {
           </div>
           <span className="text-xl">
             Already have an account?&nbsp;
-            <Link to="/signin" className="text-[#481E14] navlink font-semibold">
+            <Link
+              to="/signin"
+              className="text-[#481E14] loginLink font-semibold"
+            >
               Sign In
             </Link>
           </span>
