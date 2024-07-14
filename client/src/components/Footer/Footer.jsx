@@ -33,6 +33,7 @@ function Footer() {
               onChange={(e) => setFormdata({ email: e.target.value })}
               className="bg-[#1B1A17] px-4 py-2 font-['Poppins']  outline-none w-10/12"
               type="email"
+              placeholder="user@mail.com"
             />
             <button
               className="font-semibold font-['Oswald'] px-4 py-2 bg-[#E6D5B8] text-[#1B1A17] hover:bg-[#F0A500] uppercase hover:tracking-[0.15em] transition-all duration-300 ease-in-out border-4 border-[#E6D5B8] hover:border-[#F0A500]"

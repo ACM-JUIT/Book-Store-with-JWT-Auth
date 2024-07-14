@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import "./Header.css";
-import Button from "../Button/Button";
 
 function Header() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -37,8 +36,12 @@ function Header() {
           Store
         </NavLink>
       </div>
-      <div className="hidden md:flex justify-end w-1/3">
-        <Button value="Sign Up" to="/signup" />
+      <div className="hidden md:flex justify-end w-1/3 items-center">
+        <NavLink to="/signup">
+          <button className="font-['Oswald'] text-2xl border-2 border-[#E6D5B8] hover:bg-[#F0A500] hover:tracking-[0.25em] bg-[#1B1A17] text-white uppercase px-[30px] duration-500 h-1/2 ">
+            Sign Up
+          </button>
+        </NavLink>
       </div>
       <div className="flex md:hidden items-center w-2/3 justify-end">
         <div className="inline-block cursor-pointer" onClick={toggleMenu}>
@@ -56,8 +59,10 @@ function Header() {
           <NavLink className="navlink" to="/store">
             Store
           </NavLink>
-          <NavLink className="signup">
-            <Button value="Sign Up" to="/signup" />
+          <NavLink to="/signup">
+            <button className="font-['Oswald'] text-2xl border-2 border-[#E6D5B8] hover:bg-[#F0A500] hover:tracking-[0.25em] bg-[#1B1A17] text-white uppercase px-[30px] duration-500">
+              Sign Up
+            </button>
           </NavLink>
         </div>
       )}
