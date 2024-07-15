@@ -1,5 +1,5 @@
 import express from "express";
-import { authRoutes, userRoutes } from "./routes/index.js";
+import { authRoutes, listingRoutes, userRoutes } from "./routes/index.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -30,6 +30,7 @@ app.get("/test", (req, res) => {
 //routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/listing", listingRoutes);
 
 //middleware to handle errors and stuff
 app.use((err, req, res, next) => {
