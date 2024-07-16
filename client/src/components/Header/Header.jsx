@@ -1,99 +1,90 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { useSelector } from "react-redux";
-import "./Header.css";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { signOutSuccess } from "../../redux/user/userSlice";
 
 function Header() {
-  const [openMenu, setOpenMenu] = useState(false);
+  const navLinkHoverEffect =
+    "relative before:content-[''] before:absolute before:h-[3px] before:w-0  before:right-0 before:left-0 before:bottom-0 before:bg-black hover:before:w-full before:transition-[width] duration-700 ease-in-out";
   const { currentUser } = useSelector((state) => state.user);
-  const [profileBtn, setProfileBtn] = useState(false);
-  const menuOpenStyle = {
-    width: "35px",
-    height: "2px",
-    backgroundColor: "black",
-    margin: "6px 0",
-    transition: "0.4s",
-  };
-  const toggleMenu = () => {
-    setOpenMenu(!openMenu);
+  const dispatch = useDispatch();
+  const signOut = async () => {
+    try {
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signOutSuccess());
+      }
+    } catch (error) {}
   };
   return (
-    <header className="px-4 py-2 flex  flex-wrap bg-[#1B1A17] text-white min-h-[100px] border-b-2 border-[rgba(230,213,184,0.2)]">
-      <div className="w-1/3 flex justify-start">
+    <header className="border-b-2 border-black flex justify-between">
+      {/* start */}
+      <div className="m-2 px-3 py-2 w-1/6 flex justify-start">
+        {/* logo */}
         <Link
           to="/"
-          className="flex items-center text-2xl  lg:text-4xl font-['Playwrite_HU']  text-[#E6D5B8] font-semibold hover:scale-105 transition-transform duration-300 ease-in-out"
+          className="flex items-center text-3xl md:text-4xl font-['Playwrite_HU'] text-[#1B1A17] font-semibold "
         >
           Books <span className="text-[#E45826]">Heaven</span>
         </Link>
       </div>
-      <div className="hidden md:flex justify-center  items-center gap-10 w-1/3">
-        <NavLink className="navlink" to="/">
-          Home
-        </NavLink>
-        <NavLink className="navlink" to="/about">
-          About
-        </NavLink>
-        <NavLink className="navlink" to="/store">
-          Store
-        </NavLink>
-        <NavLink className="navlink" to="/contact">
-          Contact
-        </NavLink>
+      {/* middle */}
+      <div className="w-1/3 flex justify-evenly items-center gap">
+        {/* Navlinks */}
+        <div className="w-1/2 text-2xl font-['Oswald']">
+          <ul className="w-full flex justify-evenly">
+            <li>
+              <Link to="/" className={navLinkHoverEffect}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className={navLinkHoverEffect}>
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/store" className={navLinkHoverEffect}>
+                Store
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className={navLinkHoverEffect}>
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+        {/* Searchbar */}
+        <input
+          type="text"
+          placeholder="Search here"
+          className="border-2 border-black px-4 py-2 rounded-md text-md font-['Poppins']"
+        />
       </div>
-      {currentUser ? (
-        <div className="hidden md:flex justify-end w-1/3 items-center">
-          <button>
-            <img
-              className="w-10 h-10 rounded-full"
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-              alt="pfp"
-            />
-          </button>
-        </div>
-      ) : (
-        <div className="hidden md:flex justify-end w-1/3 items-center">
-          <NavLink to="/signup">
-            <button className="font-['Oswald'] text-2xl border-2 border-[#E6D5B8] hover:bg-[#F0A500] hover:tracking-[0.25em] bg-[#1B1A17] text-white uppercase px-[30px] duration-500 h-1/2 ">
-              Sign Up
-            </button>
-          </NavLink>
-        </div>
-      )}
-      <div className={`flex md:hidden items-center  justify-end w-2/3`}>
-        <div className="inline-block cursor-pointer" onClick={toggleMenu}>
-          {openMenu ? <X size={35} /> : <Menu size={35} />}
-        </div>
+      {/* end */}
+      <div className="flex items-center w-1/6 justify-end">
+        {currentUser ? (
+          <Link
+            onClick={signOut}
+            className="border-2 border-black m-4 px-4 py-2 font-['Oswald'] text-2xl rounded-lg hover:bg-black hover:text-white hover:tracking-wider transition-all duration-300 ease-in-out"
+          >
+            Sign out
+          </Link>
+        ) : (
+          <Link
+            to="/signup"
+            className="border-2 border-black m-4 px-4 py-2 font-['Oswald'] text-2xl rounded-lg hover:bg-black hover:text-white hover:tracking-wider transition-all duration-300 ease-in-out"
+          >
+            Sign Up
+          </Link>
+        )}
       </div>
-      {openMenu && (
-        <div className="md:hidden flex flex-col w-full items-center gap-3 mt-2">
-          <NavLink className="navlink" to="/">
-            Home
-          </NavLink>
-          <NavLink className="navlink" to="/about">
-            About
-          </NavLink>
-          <NavLink className="navlink" to="/store">
-            Store
-          </NavLink>
-          <NavLink className="navlink" to="/contact">
-            Contact
-          </NavLink>
-
-          {currentUser ? (
-            <NavLink className="navlink" to="#">
-              Profile
-            </NavLink>
-          ) : (
-            <NavLink to="/signup">
-              <button className="font-['Oswald'] text-2xl border-2 border-[#E6D5B8] hover:bg-[#F0A500] hover:tracking-[0.25em] bg-[#1B1A17] text-white uppercase px-[30px] duration-500">
-                Sign Up
-              </button>
-            </NavLink>
-          )}
-        </div>
-      )}
     </header>
   );
 }

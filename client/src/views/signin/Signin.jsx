@@ -1,24 +1,31 @@
-import React, { useState } from "react";
-import readingBookGrahic from "../../assets/readingBookGraphic.png";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../signup/Signup.css";
-import {
-  signInFailure,
-  signInStart,
-  signinSuccess,
-} from "../../redux/user/userSlice";
-import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/Spinner/Spinner";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFail,
+} from "../../redux/user/userSlice";
 
 function Signin() {
-  const [formdata, setFormdata] = useState({});
-  const navigate = useNavigate();
+  const LinkHoverEffect =
+    "relative before:content-[''] before:absolute before:h-[3px] before:w-0  before:right-0 before:left-0 before:bottom-0 before:bg-black hover:before:w-full before:transition-[width] duration-700 ease-in-out";
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { loading, error: errorMessages } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formdata.email || !formdata.password) {
-      return dispatch(signInFailure("Please fill all the fields"));
+    console.log(formData);
+    if (!formData.email || !formData.password) {
+      return dispatch(signInFail("Please Fill out all fields."));
     }
     try {
       dispatch(signInStart());
@@ -27,82 +34,99 @@ function Signin() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formdata),
+        body: JSON.stringify(formData),
       });
       const data = await res.json();
       if (data.success === false) {
-        return dispatch(signInFailure(data.message));
+        return dispatch(signInFail(data.message));
       }
       if (res.ok) {
-        dispatch(signinSuccess(data));
+        dispatch(signInSuccess(data));
         navigate("/");
       }
     } catch (error) {
-      dispatch(signInFailure(error.message));
+      dispatch(signInFail(error.message));
     }
-    setFormdata({});
-  };
-  const handleChange = (e) => {
-    setFormdata({ ...formdata, [e.target.name]: e.target.value });
   };
   return (
-    <div className="h-dvh flex flex-col lg:flex-row bg-[#F0A500]">
-      <div className="w-full lg:w-5/12 flex flex-col gap-10 justify-center items-center">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col font-['Oswald'] gap-5 tracking-wider w-full h-full justify-center items-center "
-        >
-          <span className="text-5xl font-['Oswald'] font-semibold tracking-wider underline text-center">
-            Sign In
-          </span>
-          <div className="flex flex-col">
-            <label htmlFor="email">Email*</label>
-            <input
-              onChange={handleChange}
-              type="email"
-              name="email"
-              id="email"
-              placeholder="user@service.com"
-              className="px-6 py-4 outline-none border-2 border-[#1B1A17] rounded-md font=['Poppins']  min-w-[300px] md:min-w-[400px] text-lg"
-            />
+    <div className="bg-[#E9E9E9] h-[95dvh] flex items-center">
+      <div className="bg-white h-[85%] w-[70%] mx-auto rounded-[50px] px-10 py-6 shadow-xl flex">
+        {/* left */}
+        <div className=" w-1/2 h-full flex flex-col">
+          {/* Upper */}
+          <div className="w-full h-4/6  flex flex-col justify-center">
+            <div className="my-16 flex justify-center">
+              <Link
+                to="/"
+                className="flex items-center text-5xl  font-['Playwrite_HU'] text-[#1B1A17] font-semibold "
+              >
+                Books <span className="text-[#E45826]">Heaven</span>
+              </Link>
+            </div>
+            <span className="text-[3.5rem] uppercase text-wrap px-20 text-center font-['Oswald'] tracking-wider [word-spacing:20px]">
+              Your gateway to a <br /> world of <br /> literature.
+            </span>
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="password">Password*</label>
-            <input
-              onChange={handleChange}
-              type="password"
-              name="password"
-              id="password"
-              placeholder="password"
-              className="px-6 py-4 outline-none border-2 border-[#1B1A17] rounded-md font=['Poppins']  min-w-[300px] md:min-w-[400px] text-lg"
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="min-w-[300px] md:min-w-[400px] px-8 py-4 border-2 rounded-md text-white text-2xl font-['Oswald'] border-[#F0A500] my-2 bg-[#1B1A17] hover:bg-[#F0A500] hover:border-[#1B1A17] hover:tracking-[0.13em] transition-all duration-500 hover:text-black text-center hover:font-semibold"
-            >
-              {loading ? <Spinner /> : "Sign In"}
-            </button>
-          </div>
-          <span className="text-xl">
-            Dont have an account?&nbsp;
+          {/* Lower */}
+          <div className="w-full h-2/6  flex flex-col justify-center items-center gap-4">
+            <span className="text-3xl font-bold">Don't have an Account?</span>
             <Link
-              to="/signup"
-              className="text-[#481E14] navlink font-semibold loginLink"
+              to="/signin"
+              className={`text-2xl font-semibold  ${LinkHoverEffect}`}
             >
-              Sign Up
+              Sign In
             </Link>
-          </span>
-        </form>
-      </div>
-      <div className="flex  min-w-[300px] w-full lg:w-1/2 h-1/3 md:h-1/2 lg:h-full items-center">
-        <div className="aspect-square min-w-[100px] lg:min-w-[500px] w-[80%] h-[75%] m-auto rounded-[10%] flex justify-center">
-          <img
-            src={readingBookGrahic}
-            alt=""
-            className="aspect-square max-w-full max-h-full m-auto filter  drop-shadow-lg "
-          />
+          </div>
+        </div>
+        {/* right */}
+        <div className="bg-[url('https://www.creativefabrica.com/wp-content/uploads/2021/10/29/Simple-Background-Design-Graphics-19387159-1.jpg')] w-1/2 h-full rounded-2xl shadow-xl flex justify-center items-center flex-col">
+          {errorMessages && (
+            <div className="bg-white text-red-600 text-3xl mb-8 p-6 rounded-xl shadow-xl mx-8">
+              {errorMessages}
+            </div>
+          )}
+          <div className="w-[65%] h-[55%] bg-white rounded-2xl shadow-2xl">
+            <form
+              onSubmit={handleSubmit}
+              className="p-10 w-full flex flex-col justify-between"
+            >
+              <span className="text-2xl font-bold mb-7">Log In</span>
+              <div>
+                <div className="mb-6">
+                  <label htmlFor="email" className="text-lg  font-['Poppins']">
+                    Email
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={formData.email}
+                    id="email"
+                    type="email"
+                    placeholder="user@mail.com"
+                    className="w-full p-2 my-4 border-b-2 border-black focus:outline-none"
+                  />
+                </div>
+                <div className="mb-6">
+                  <label
+                    htmlFor="password"
+                    className="text-lg  font-['Poppins']"
+                  >
+                    Password
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={formData.password}
+                    id="password"
+                    type="password"
+                    placeholder="**********"
+                    className="w-full p-2 my-4 border-b-2 border-black focus:outline-none"
+                  />
+                </div>
+                <button type="submit" className="">
+                  {loading ? <Spinner /> : "Log In"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
