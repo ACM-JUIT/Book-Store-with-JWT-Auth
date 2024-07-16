@@ -7,8 +7,7 @@ function Home() {
     <div className="h-fit">
       <div className="bg-blue-400 w-full h-[500px] flex mb-10">
         <span className="h-full w-1/2 text-5xl font-['Oswald'] text-white drop-shadow-xl text-wrap text-left flex justify-center items-center px-48">
-          Welcome to our online sanctuary of stories, where each book is a
-          gateway to adventure, knowledge, and endless inspiration
+          lorem ipsum dolor sit amet, consectetur adipiscing elit
         </span>
         <img src={booksImg} alt="" />
       </div>

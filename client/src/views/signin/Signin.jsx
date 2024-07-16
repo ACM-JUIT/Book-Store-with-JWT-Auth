@@ -74,7 +74,7 @@ function Signin() {
               to="/signup"
               className={`text-2xl font-semibold  ${LinkHoverEffect}`}
             >
-              Sign In
+              Sign Up
             </Link>
           </div>
         </div>
