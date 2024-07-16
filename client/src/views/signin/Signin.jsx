@@ -71,7 +71,7 @@ function Signin() {
           <div className="w-full h-2/6  flex flex-col justify-center items-center gap-4">
             <span className="text-3xl font-bold">Don't have an Account?</span>
             <Link
-              to="/signin"
+              to="/signup"
               className={`text-2xl font-semibold  ${LinkHoverEffect}`}
             >
               Sign In
