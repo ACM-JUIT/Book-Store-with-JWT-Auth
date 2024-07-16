@@ -22,7 +22,7 @@ function Header() {
     } catch (error) {}
   };
   return (
-    <header className="border-b-2 border-black flex justify-between">
+    <header className="border-b-2 border-gray-400 flex justify-between">
       {/* start */}
       <div className="m-2 px-3 py-2 w-1/6 flex justify-start">
         {/* logo */}
